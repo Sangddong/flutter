@@ -11,7 +11,7 @@ void main () {
   a = 'another string';
 
   // ❌ 타입 변경 불가능
-  a = 10; -> Error: A value of type 'int' can't be assigned to a variable of type 'String'.
+  a = 10; // Error: A value of type 'int' can't be assigned to a variable of type 'String'.
 }
 ```
 **2. final**
@@ -23,10 +23,10 @@ void main() {
   final list = [1, 2, 3];
 
   // ❌ 재할당 불가능
-  list = [4, 5, 6]; -> Error: Can't assign to the final variable 'list'.
+  list = [4, 5, 6]; // Error: Can't assign to the final variable 'list'.
 
   // ❌ 타입 변경 불가능
-  list = "this is string"; -> Error: Can't assign to the final variable 'list'.
+  list = "this is string"; // Error: Can't assign to the final variable 'list'.
 
   // ✅ 내부값 변경 가능
   list[0] = 0;
@@ -40,7 +40,12 @@ void main() {
   const name = '기존 이름';
 
   // ❌ 재할당 불가능
-  name = '재할당 이름'; -> Error: Can't assign to the const variable 'name'.
+  name = '재할당 이름'; // Error: Can't assign to the const variable 'name'.
+
+  const arr = [1, 2, 3];
+
+  // ❌ 내부값 변경 불가능
+  arr[0] = 4; // Unhandled exception: Unsupported operation: Cannot modify an unmodifiable list
 }
 ```
 **4. dynamic**
@@ -61,6 +66,16 @@ void main() {
 }
 ```
 
+**5. final vs const**
+- final : **런타임** 시점에 확정
+- const : **컴파일** 시점에 확정
+-> `DateTime` 타입은 빌드 시점에 값이 설정되어, const로 선언 불가능
+```dart
+void main () async {
+  final DateTime now_final = DateTime.now();
+  const DateTime now_const = DateTime.now();  // Error: Cannot invoke a non-'const' constructor where a const expression is expected.
+}
+```
 ---
 
 ### Summary
