@@ -46,4 +46,4 @@ A new Flutter project.
     - .end : 반대축의 끝에 정렬
     - .center : 반대축의 중앙에 정렬
     - .stretch : 반대축으로 위젯들을 최대로 확장
-    -   .baseline : 텍스트 기준선을 기준으로 위젯 정렬
+    - .baseline : 텍스트 기준선을 기준으로 위젯 정렬
