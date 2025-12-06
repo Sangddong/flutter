@@ -5,7 +5,8 @@ final homeUrl = Uri.parse('http://pub.dev');
 
 class HomeScreen extends StatelessWidget {
   WebViewController controller = WebViewController()
-  ..loadRequest(homeUrl);
+    ..setJavaScriptMode(JavaScriptMode.unrestricted)
+    ..loadRequest(homeUrl);
 
   HomeScreen({super.key});
 
