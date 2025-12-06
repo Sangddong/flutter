@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+
+final homeUrl = Uri.parse('http://pub.dev');
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  WebViewController controller = WebViewController()
+  ..loadRequest(homeUrl);
+
+  HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,6 +16,9 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.orange,
         title: Text('APP BAR'),
         centerTitle: true,
+      ),
+      body: WebViewWidget(
+        controller: controller,
       ),
     );
   }
