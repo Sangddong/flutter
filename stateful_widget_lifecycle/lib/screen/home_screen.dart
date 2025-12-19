@@ -1,29 +1,50 @@
 import 'package:flutter/material.dart';
 
-class  extends StatefulWidget {
-  const ({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  State<> createState() => _State();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _State extends State<> with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(vsync: this);
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+class _HomeScreenState extends State<HomeScreen> {
+  bool show = true;
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: SizedBox(
+        width: double.infinity,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if(show) CodeFactoryWidget(),
+            SizedBox(height: 32),
+            ElevatedButton(
+              onPressed: (){
+                setState(() {
+                  show = !show;
+                });
+              },
+              child: Text('클릭해서 박스 노출/비노출')
+            )
+          ],
+        ),
+      )
+    );
   }
 }
+
+class CodeFactoryWidget extends StatelessWidget {
+  const CodeFactoryWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 50,
+      height: 50,
+      color: Colors.red,
+    );
+  }
+}
+
