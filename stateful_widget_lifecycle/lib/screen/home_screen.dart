@@ -9,6 +9,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool show = false;
+  Color color = Colors.red;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,16 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if(show) CodeFactoryWidget(),
+            if(show) GestureDetector(
+              onTap: (){
+                setState(() {
+                  color = color == Colors.blue ? Colors.red : Colors.blue;
+                });
+              },
+              child: CodeFactoryWidget(
+                color: color,
+              ),
+            ),
             SizedBox(height: 32),
             ElevatedButton(
               onPressed: (){
@@ -36,7 +46,12 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class CodeFactoryWidget extends StatefulWidget {
-  CodeFactoryWidget({super.key}) {
+  final Color color;
+
+  CodeFactoryWidget({
+    super.key,
+    required this.color
+  }) {
     print('1) Stateful Widget Constructor');
   }
 
@@ -49,7 +64,6 @@ class CodeFactoryWidget extends StatefulWidget {
 }
 
 class _CodeFactoryWidgetState extends State<CodeFactoryWidget> {
-  Color color = Colors.red;
   
   @override
   void initState() {
@@ -69,18 +83,10 @@ class _CodeFactoryWidgetState extends State<CodeFactoryWidget> {
   Widget build(BuildContext context) {
     print('5) Stateful Widget Build');
 
-    return GestureDetector(
-      onTap: (){
-        print('click');
-        setState(() {
-          color = color == Colors.red ? Colors.blue : Colors.red;
-        });
-      },
-      child: Container(
-        width: 50,
-        height: 50,
-        color: color,
-      ),
+    return Container(
+      width: 50,
+      height: 50,
+      color: widget.color,
     );
   }
 
