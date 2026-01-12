@@ -49,6 +49,8 @@ class CodeFactoryWidget extends StatefulWidget {
 }
 
 class _CodeFactoryWidgetState extends State<CodeFactoryWidget> {
+  Color color = Colors.red;
+  
   @override
   void initState() {
     print('3) Stateful Widget InitState');
@@ -67,10 +69,18 @@ class _CodeFactoryWidgetState extends State<CodeFactoryWidget> {
   Widget build(BuildContext context) {
     print('5) Stateful Widget Build');
 
-    return Container(
-      width: 50,
-      height: 50,
-      color: Colors.red,
+    return GestureDetector(
+      onTap: (){
+        print('click');
+        setState(() {
+          color = color == Colors.red ? Colors.blue : Colors.red;
+        });
+      },
+      child: Container(
+        width: 50,
+        height: 50,
+        color: color,
+      ),
     );
   }
 
