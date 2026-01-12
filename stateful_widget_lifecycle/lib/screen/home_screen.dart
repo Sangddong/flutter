@@ -8,7 +8,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool show = true;
+  bool show = false;
 
   @override
   Widget build(BuildContext context) {
@@ -35,16 +35,56 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class CodeFactoryWidget extends StatelessWidget {
-  const CodeFactoryWidget({super.key});
+class CodeFactoryWidget extends StatefulWidget {
+  CodeFactoryWidget({super.key}) {
+    print('1) Stateful Widget Constructor');
+  }
+
+  @override
+  State<CodeFactoryWidget> createState() {
+    print('2) Stateful Widget Create State');
+
+    return _CodeFactoryWidgetState();
+  }
+}
+
+class _CodeFactoryWidgetState extends State<CodeFactoryWidget> {
+  @override
+  void initState() {
+    print('3) Stateful Widget InitState');
+
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    print('4) Stateful Widget DidChangeDependencies');
+
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
+    print('5) Stateful Widget Build');
+
     return Container(
       width: 50,
       height: 50,
       color: Colors.red,
     );
+  }
+
+  @override
+  void deactivate() {
+    print('6) Stateful Widget Deactivate');
+
+    super.deactivate();
+  }
+
+  @override
+  void dispose() {
+    print('7) Stateful Widget Dispose');
+    super.dispose();
   }
 }
 
