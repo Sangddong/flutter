@@ -23,32 +23,24 @@ class _Top extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme
+        .of(context)
+        .textTheme;
+
     return Expanded(
       child: Column(
         children: [
           Text(
             'U&I',
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'Pacifico',
-              fontSize: 30,
-            ),
+            style: textTheme.bodyLarge,
           ),
           Text(
             'The day we first met',
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'RubikBubbles',
-              fontSize: 20,
-            ),
+            style: textTheme.bodyMedium,
           ),
           Text(
             '2025.11.24',
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'RubikBubbles',
-              fontSize: 15,
-            ),
+            style: textTheme.bodySmall,
           ),
           IconButton(
             iconSize: 50,
@@ -58,11 +50,7 @@ class _Top extends StatelessWidget {
           ),
           Text(
             'D + 1',
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'RubikBubbles',
-              fontSize: 30,
-            ),
+            style: textTheme.displayLarge,
           ),
         ],
       ),
