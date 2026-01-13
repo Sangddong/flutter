@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -45,7 +46,27 @@ class _Top extends StatelessWidget {
           IconButton(
             iconSize: 50,
             color: Colors.white,
-            onPressed: () {},
+            onPressed: () {
+              showCupertinoDialog(
+                context: context,
+                barrierDismissible: true,
+                builder: (BuildContext context) {
+                  return Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      color: Colors.white,
+                      height: 300,
+                      child: CupertinoDatePicker(
+                        mode: CupertinoDatePickerMode.date,
+                        onDateTimeChanged: (DateTime date) {
+                          print(date);
+                        },
+                        dateOrder: DatePickerDateOrder.ymd,
+                      ),
+                    ),
+                  );
+                });
+            },
             icon: Icon(Icons.favorite),
           ),
           Text(
