@@ -77,11 +77,7 @@ class _Body extends StatelessWidget {
     return Expanded(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          123,
-          456,
-          789
-        ]
+        children: numbers
           .map((e) => e.toString().split(''))
           .map((numList) => Row(
           children:
