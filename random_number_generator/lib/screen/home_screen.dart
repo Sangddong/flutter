@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:random_number_generator/constant/color.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({
+    super.key
+  });
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final List<int> numbers = [123, 456, 789];
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +26,9 @@ class HomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               _Header(),
-              _Body(),
+              _Body(
+                numbers: numbers
+              ),
               _Footer()
             ],
           ),
@@ -54,7 +65,12 @@ class _Header extends StatelessWidget {
 }
 
 class _Body extends StatelessWidget {
-  const _Body({super.key});
+  final List<int> numbers;
+
+  const _Body({
+    super.key,
+    required this.numbers
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -62,17 +78,18 @@ class _Body extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          [1, 2, 3],
-          [4, 5, 6],
-          [7, 8, 9]
-        ].map((numList) => Row(
+          123,
+          456,
+          789
+        ]
+          .map((e) => e.toString().split(''))
+          .map((numList) => Row(
           children:
             numList.map(
-              (number) => Text(
-                number.toString(),
-                style: TextStyle(
-                  color: Colors.white
-                ),
+              (number) => Image.asset(
+                'asset/img/$number.png',
+                width: 50,
+                height: 70,
               )
             ).toList()
           )
