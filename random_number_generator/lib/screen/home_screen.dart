@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:random_number_generator/componant/number_to_image.dart';
 import 'package:random_number_generator/constant/color.dart';
 import 'dart:math';
 import 'package:random_number_generator/screen/setting_screen.dart';
@@ -112,18 +113,12 @@ class _Body extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: numbers
-          .map((e) => e.toString().split(''))
-          .map((numList) => Row(
-          children:
-            numList.map(
-              (number) => Image.asset(
-                'asset/img/$number.png',
-                width: 50,
-                height: 70,
-              )
-            ).toList()
+          .map(
+            (e) => NumberToImage(
+              maxNumber: e
+            )
           )
-        ).toList()
+          .toList()
       )
     );
   }

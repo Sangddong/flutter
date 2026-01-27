@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:random_number_generator/componant/number_to_image.dart';
 import 'package:random_number_generator/constant/color.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -26,13 +27,22 @@ class _SettingScreenState extends State<SettingScreen> {
               _Number(
                 maxNumber: maxNumber,
               ),
-              _Slider(),
+              _Slider(
+                value: maxNumber,
+                onChanged: onSliderChanged,
+              ),
               _Button()
             ],
           ),
         ),
       ),
     );
+  }
+
+  onSliderChanged (double value) {
+    setState(() {
+      maxNumber = value;
+    });
   }
 }
 
@@ -47,29 +57,32 @@ class _Number extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Row(
-        children: maxNumber
-          .toInt()
-          .toString()
-          .split('')
-          .map(
-              (number) => Image.asset(
-            'asset/img/$number.png',
-            width: 50,
-            height: 70,
-          )
-        ).toList(),
+      child: NumberToImage(
+        maxNumber: maxNumber.toInt()
       )
     );
   }
 }
 
 class _Slider extends StatelessWidget {
-  const _Slider({super.key});
+  final double value;
+  final ValueChanged<double> onChanged;
+
+  const _Slider({
+    super.key,
+    required this.value,
+    required this.onChanged
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Slider(
+      value: value,
+      min: 1000,
+      max: 100000,
+      activeColor: redColor,
+      onChanged: onChanged
+    );
   }
 }
 
