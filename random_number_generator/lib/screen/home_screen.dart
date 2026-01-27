@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:random_number_generator/constant/color.dart';
+import 'dart:math';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -11,7 +12,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<int> numbers = [123, 456, 789];
+  List<int> numbers = [123, 456, 789];
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +30,27 @@ class _HomeScreenState extends State<HomeScreen> {
               _Body(
                 numbers: numbers
               ),
-              _Footer()
+              _Footer(
+                onPressed: generateRandomNumber,
+              )
             ],
           ),
         ),
       ),
     );
+  }
+
+  generateRandomNumber () {
+    final Set<int> newNumbers = {};
+
+    while(newNumbers.length < 3) {
+      final randomNumber = Random().nextInt(1000);
+      newNumbers.add(randomNumber);
+    }
+
+    setState(() {
+      numbers = newNumbers.toList();
+    });
   }
 }
 
@@ -96,7 +112,11 @@ class _Body extends StatelessWidget {
 }
 
 class _Footer extends StatelessWidget {
-  const _Footer({super.key});
+  final VoidCallback onPressed;
+  const _Footer({
+    super.key,
+    required this.onPressed
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +125,7 @@ class _Footer extends StatelessWidget {
             backgroundColor: redColor,
             foregroundColor: Colors.white
         ),
-        onPressed: (){},
+        onPressed: onPressed,
         child: Text('생성하기')
     );
   }
