@@ -1,20 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/screens/design_screen.dart';
+import 'package:hello_world/screens/home_screen.dart';
 
 void main() {
   runApp(
     MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: Colors.black,
-        body: Center(
-          child: Text(
-            'Hello world!',
-            style: TextStyle(
-                color: Colors.white
-            ),
-          ),
-        ),
-      ),
+      home: HomeScreen(),
     ),
   );
 }
