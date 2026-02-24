@@ -10,10 +10,15 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppScaffold(
       appBar: AppBarItem(title: "Home"),
-      body: Column(
-        children: [
-          Text("home", style: TextStyle(fontSize: 60.0),),
-        ],
+      body: ListView(
+      padding: EdgeInsets.zero,
+      children: List.generate(
+          30,
+          (index) => Text(
+            "home text",
+            style: TextStyle(fontSize: 40),
+          ),
+        ),
       )
     );
   }
