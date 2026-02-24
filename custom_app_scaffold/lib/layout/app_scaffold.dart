@@ -35,8 +35,7 @@ class AppScaffold extends StatelessWidget {
                 height: _appBarHeight,
                 child: appBar!,
               ),
-            ) q
-              \][]: Padding(
+            ): Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: body,
               ),
