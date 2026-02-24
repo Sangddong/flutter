@@ -24,10 +24,8 @@ class AppScaffold extends StatelessWidget {
       extendBodyBehindAppBar: true,
       body: Stack(
         children: [
-          // 층 1: 바디
           Positioned.fill(
             child: NestedScrollView(
-              // ✅ 그림자가 영역 밖으로 삐져나와도 잘리지 않도록 설정
               clipBehavior: Clip.none,
               headerSliverBuilder: (context, innerBoxIsScrolled) => [
                 if (hasAppBar)
@@ -36,7 +34,6 @@ class AppScaffold extends StatelessWidget {
                   ),
               ],
               body: Padding(
-                // ✅ 요청하신 양 옆 20px 여백
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: MediaQuery.removePadding(
                   context: context,
