@@ -36,10 +36,7 @@ class AppScaffold extends StatelessWidget {
               body: CustomScrollView(
                 slivers: [
                   SliverPadding(
-                    padding: EdgeInsets.only(
-                      top: hasAppBar ? 0 : 20.0,
-                      bottom: 20.0,
-                      left: 20.0, right: 20.0),
+                    padding: EdgeInsets.all(20.0),
                     sliver: SliverToBoxAdapter(
                       child: body,
                     ),
