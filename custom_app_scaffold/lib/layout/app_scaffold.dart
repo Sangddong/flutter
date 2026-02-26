@@ -33,13 +33,18 @@ class AppScaffold extends StatelessWidget {
                     child: SizedBox(height: totalAppBarHeight),
                   ),
               ],
-              body: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: MediaQuery.removePadding(
-                  context: context,
-                  removeTop: true,
-                  child: body,
-                ),
+              body: CustomScrollView(
+                slivers: [
+                  SliverPadding(
+                    padding: EdgeInsets.only(
+                      top: hasAppBar ? 0 : 20.0,
+                      bottom: 20.0,
+                      left: 20.0, right: 20.0),
+                    sliver: SliverToBoxAdapter(
+                      child: body,
+                    ),
+                  )
+                ],
               ),
             ),
           ),

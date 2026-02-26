@@ -11,12 +11,22 @@ class HomeScreen extends StatelessWidget {
     return AppScaffold(
       appBar: AppBarItem(title: "Home"),
       body: ListView(
-      padding: EdgeInsets.zero,
-      children: List.generate(
-          30,
-          (index) => Text(
-            "home text",
-            style: TextStyle(fontSize: 40),
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        padding: EdgeInsets.zero,
+        children: List.generate(
+          15,
+          (index) => Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(color: Colors.red, blurRadius: 50.0)
+              ]
+            ),
+            child: Text(
+              "home text",
+              style: TextStyle(fontSize: 40),
+            ),
           ),
         ),
       )
