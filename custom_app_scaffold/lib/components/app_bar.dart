@@ -21,7 +21,7 @@ class AppBarItem extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          // 1. back button
+          // back button
           if (showBack)
             Positioned(
               left: 0,
@@ -31,7 +31,7 @@ class AppBarItem extends StatelessWidget {
               ),
             ),
 
-          // 2. title
+          // title
           Text(
             title,
             style: const TextStyle(
@@ -40,7 +40,7 @@ class AppBarItem extends StatelessWidget {
             ),
           ),
 
-          // 3. action buttons
+          // action buttons
           if (actions != null)
             Positioned(
               right: 0,
