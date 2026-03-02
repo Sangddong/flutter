@@ -2,6 +2,7 @@ import 'package:custom_app_scaffold/layout/app_scaffold.dart';
 import 'package:flutter/material.dart';
 
 import '../components/app_bar.dart';
+import '../components/bottom_button.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -29,7 +30,11 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ),
-      )
+      ),
+      bottomButton: BottomButtonItem(
+        onPressed: () {},
+        buttonContent: Text("Bottom Button"),
+      ),
     );
   }
 }
