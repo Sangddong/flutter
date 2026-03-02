@@ -14,8 +14,7 @@ class BottomButtonItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        // fixedSize: Size(double.infinity, double.infinity),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.white
       ),
       onPressed: onPressed,
       child: buttonContent

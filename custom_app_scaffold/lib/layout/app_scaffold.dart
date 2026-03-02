@@ -14,15 +14,16 @@ class AppScaffold extends StatelessWidget {
   });
 
   static const double _appBarHeight = 56.0;
-  static const double _bottomButtonHeight = 44.0;
-  static const double _totalBottomButtonHeight = _bottomButtonHeight + 28.0;
+  static const double _bottomButtonHeight = 56.0;
+  static const double _bottomButtonMargin = 24.0;  // top: 0.8, bottom: 16.0
+  static const double _bottomButtonTotalHeight = _bottomButtonHeight + _bottomButtonMargin;
 
   @override
   Widget build(BuildContext context) {
     final hasAppBar = appBar != null;
     final hasBottomButton = bottomButton != null;
     final statusBarHeight = MediaQuery.of(context).padding.top;
-    final totalAppBarHeight = statusBarHeight + _appBarHeight;
+    final appBarTotalHeight = statusBarHeight + _appBarHeight;
 
     return Scaffold(
       backgroundColor: Colors.lightGreen,
@@ -30,128 +31,157 @@ class AppScaffold extends StatelessWidget {
       body: Stack(
         children: [
           Positioned.fill(
-            child: NestedScrollView(
-              clipBehavior: Clip.none,
-              headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                if (hasAppBar)
-                  SliverToBoxAdapter(
-                    child: SizedBox(height: totalAppBarHeight),
-                  ),
-              ],
-              body: bodyScrollView(hasBottomButton),
+            child: _buildMainContent(
+              context: context,
+              hasAppBar: hasAppBar,
+              hasBottomButton: hasBottomButton,
+              appBarTotalHeight: appBarTotalHeight
             ),
           ),
 
-          // 층 2: 블러 & 흰색 그라데이션
+          // appBar
           if (hasAppBar)
-            appBarDesign(totalAppBarHeight),
-
-          // 층 3: 실제 앱바
-          if (hasAppBar)
-            appBarContainer(appBar!),
+            _buildTopAppBar(
+              appBarTotalHeight: appBarTotalHeight,
+              appBar: appBar!
+            ),
 
           if (hasBottomButton)
-            bottomButtonDesign(),
-
-          if (hasBottomButton)
-            bottomButtonContainer(bottomButton!)
+            _buildBottomButton(
+              bottomButtonHeight: _bottomButtonHeight,
+              bottomButtonTotalHeight: _bottomButtonTotalHeight,
+              bottomButton: bottomButton!
+            )
         ],
       ),
     );
   }
 
-  bodyScrollView(bool hasBottomButton){
-    return CustomScrollView(
-      slivers: [
-        SliverPadding(
-          padding: EdgeInsets.only(left: 20.0, right: 20.0, bottom: hasBottomButton ? _totalBottomButtonHeight : 20.0),
-          sliver: SliverToBoxAdapter(
-            child: body,
+  Widget _buildMainContent ({
+    required BuildContext context,
+    required bool hasAppBar,
+    required bool hasBottomButton,
+    required double appBarTotalHeight
+  }){
+    return NestedScrollView(
+      clipBehavior: Clip.none,
+      headerSliverBuilder: (context, innerBoxIsScrolled) => [
+        if (hasAppBar)
+          SliverToBoxAdapter(
+            child: SizedBox(height: appBarTotalHeight),
           ),
-        )
       ],
+      body: CustomScrollView(
+        clipBehavior: Clip.none,
+        slivers: [
+          SliverPadding(
+            padding: EdgeInsets.only(
+              left: 20.0,
+              right: 20.0,
+              bottom: hasBottomButton ? _bottomButtonTotalHeight + 20.0 : 20.0
+            ),
+            sliver: SliverToBoxAdapter(
+              child: body,
+            ),
+          )
+        ],
+      ),
     );
   }
 
-  appBarDesign(double totalAppBarHeight){
+  Widget _buildTopAppBar ({
+    required double appBarTotalHeight,
+    required Widget appBar
+  }) {
     return Positioned(
       top: 0, left: 0, right: 0,
-      height: totalAppBarHeight,
-      child: IgnorePointer(
-        child: ClipRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  stops: const [0.0, 0.4, 1.0],
-                  colors: [
-                    Colors.white.withValues(alpha: 0.95),
-                    Colors.white.withValues(alpha: 0.6),
-                    Colors.white.withValues(alpha: 0.0),
-                  ],
+      height: appBarTotalHeight,
+      child: Stack(
+        children: [
+          // appBar design (gradation)
+          IgnorePointer(
+            child: ClipRect(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      stops: const [0.0, 0.4, 1.0],
+                      colors: [
+                        Colors.white.withValues(alpha: 0.95),
+                        Colors.white.withValues(alpha: 0.6),
+                        Colors.white.withValues(alpha: 0.0),
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      ),
+
+          // appBar content
+          SafeArea(
+            bottom: false,
+            child: SizedBox(
+              height: _appBarHeight,
+              child: appBar,
+            ),
+          )
+        ]
+      )
     );
   }
 
-  appBarContainer(Widget appBar){
-    return Positioned(
-      top: 0, left: 0, right: 0,
-      child: SafeArea(
-        bottom: false,
-        child: SizedBox(
-          height: _appBarHeight,
-          child: appBar,
-        ),
-      ),
-    );
-  }
-
-  bottomButtonDesign(){
+  Widget _buildBottomButton({
+    required double bottomButtonHeight,
+    required double bottomButtonTotalHeight,
+    required Widget bottomButton
+  }) {
     return Positioned(
       bottom: 0, left: 0, right: 0,
-      height: _totalBottomButtonHeight,
-      child: IgnorePointer(
-        child: ClipRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-            child: Container(
-              height: _bottomButtonHeight,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.white.withValues(alpha: 0.0),
-                    Colors.white.withValues(alpha: 0.1),
-                    Colors.white.withValues(alpha: 1.0),
-                  ],
+      height: bottomButtonTotalHeight,
+      child: Stack(
+        children: [
+          // bottomButton design (gradation)
+          IgnorePointer(
+            child: ClipRect(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                child: Container(
+                  height: bottomButtonTotalHeight,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      stops: const [0.0, 0.1, 1.0],
+                      colors: [
+                        Colors.white.withValues(alpha: 0.0),
+                        Colors.white.withValues(alpha: 0.0),
+                        Colors.white.withValues(alpha: 0.6),
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      ),
-    );
-  }
 
-  bottomButtonContainer(Widget bottomButton) {
-    return Positioned(
-      bottom: 0, left: 0, right: 0,
-      child: SafeArea(
-        bottom: false,
-        child: Container(
-          height: _bottomButtonHeight,
-          margin: const EdgeInsets.only(top: 8.0, bottom: 20.0, left: 16.0, right: 16.0),
-          child: bottomButton,
-        ),
+          // bottomButton content
+          SafeArea(
+            top: false,
+            bottom: false,
+            child: SizedBox(
+              width: double.infinity,
+              height: bottomButtonHeight,
+              child: Container(
+                margin: const EdgeInsets.only(top: 8.0, left: 16.0, right: 16.0),
+                child: bottomButton,
+              ),
+            ),
+          )
+        ]
       ),
     );
   }

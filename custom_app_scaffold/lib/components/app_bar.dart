@@ -15,12 +15,13 @@ class AppBarItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       height: 56,
-      padding: const EdgeInsets.symmetric(horizontal: 8), // 버튼 터치 영역 고려
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Stack(
-        alignment: Alignment.center, // Stack 내부 자식들을 중앙 정렬
+        alignment: Alignment.center,
         children: [
-          // 1. 뒤로가기 버튼 (왼쪽 고정)
+          // 1. back button
           if (showBack)
             Positioned(
               left: 0,
@@ -30,7 +31,7 @@ class AppBarItem extends StatelessWidget {
               ),
             ),
 
-          // 2. 제목 (무조건 물리적 중앙)
+          // 2. title
           Text(
             title,
             style: const TextStyle(
@@ -39,7 +40,7 @@ class AppBarItem extends StatelessWidget {
             ),
           ),
 
-          // 3. 액션 버튼 (오른쪽 고정)
+          // 3. action buttons
           if (actions != null)
             Positioned(
               right: 0,
