@@ -108,10 +108,9 @@ class AppScaffold extends StatelessWidget {
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      stops: const [0.0, 0.4, 1.0],
+                      stops: const [0.0, 1.0],
                       colors: [
-                        Colors.white.withValues(alpha: 0.95),
-                        Colors.white.withValues(alpha: 0.6),
+                        Colors.white.withValues(alpha: 1.0),
                         Colors.white.withValues(alpha: 0.0),
                       ],
                     ),
@@ -155,11 +154,10 @@ class AppScaffold extends StatelessWidget {
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      stops: const [0.0, 0.1, 1.0],
+                      stops: const [0.0, 1.0],
                       colors: [
                         Colors.white.withValues(alpha: 0.0),
-                        Colors.white.withValues(alpha: 0.0),
-                        Colors.white.withValues(alpha: 0.6),
+                        Colors.white.withValues(alpha: 0.7),
                       ],
                     ),
                   ),
